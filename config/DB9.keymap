@@ -5,18 +5,22 @@
 / {
     behaviors {
         // --- Comportamento 1: Segura para Layer 1, Toca para ESCAPE ---
-        lh: layer_hold {
+        // O label é "lh" e o node é "lh"
+        lh: lh {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
+            // Segurar = &mo (Momentary layer), Tocar = &kp (Keypress)
             bindings = <&mo>, <&kp>;
         };
 
         // --- Comportamento 2: Segura para Layer 2, Toca para ESCAPE ---
-        lh_bt: layer_hold_bt {
+        // O label é "lh_bt" e o node é "lh_bt"
+        lh_bt: lh_bt {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
+            // Segurar = &mo (Momentary layer), Tocar = &kp (Keypress)
             bindings = <&mo>, <&kp>;
         };
     };
@@ -26,15 +30,23 @@
 
         // --- Camada 0: Padrão (Híbrida) ---
         default_layer {
+            // Sintaxe Verificada:
+            // &lh_bt 2 ESCAPE -> Comportamento (label &lh_bt), Param 1 (layer 2), Param 2 (tecla ESCAPE)
+            // &kp LCTRL(Z) -> Tecla modificada (Ctrl + Z)
+            // &kp DEL -> Tecla Delete
             bindings = <
-                &lh_bt 2 ESCAPE    &kp LCTRL(Z)    &kp DEL     // <-- CORRIGIDO
-                &kp Q              &kp D           &kp RET
-                &kp L              &kp F           &lh 1 ESCAPE  // <-- CORRIGIDO
+                &lh_bt 2 ESCAPE    &kp LCTRL(Z)    &kp DEL
+                &kp Q              &kp D           &kp RET     // RET = Enter
+                &kp L              &kp F           &lh 1 ESCAPE
             >;
         };
 
         // --- Camada 1: Sketch Avançado ---
         layer_1 {
+            // Sintaxe Verificada:
+            // &trans -> Transparente (usa a tecla da camada 0)
+            // &kp N -> Tecla N
+            // &kp LCTRL(Y) -> Tecla modificada (Ctrl + Y)
             bindings = <
                 &trans          &kp R           &kp T
                 &kp O           &kp N           &kp LCTRL(Y)
@@ -44,6 +56,10 @@
 
         // --- Camada 2: Bluetooth (Seu layout) ---
         layer_2 {
+            // Sintaxe Verificada:
+            // &bootloader -> Entra no modo bootloader
+            // &bt BT_CLR -> Comando Bluetooth "Clear"
+            // &bt BT_SEL 0 -> Comando Bluetooth "Select profile 0"
             bindings = <
                 &trans          &none           &bootloader
                 &none           &none           &bt BT_CLR
