@@ -4,23 +4,19 @@
 
 / {
     behaviors {
-        // --- Comportamento 1: Segura para Layer 1, Toca para ESC ---
-        // (Usado no canto inferior direito)
+        // --- Comportamento 1: Segura para Layer 1, Toca para ESCAPE ---
         lh: layer_hold {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
-            // Segurar = &mo (Momentary layer), Tocar = &kp (Keypress)
             bindings = <&mo>, <&kp>;
         };
 
-        // --- Comportamento 2: Segura para Layer 2, Toca para ESC ---
-        // (Usado no canto superior esquerdo)
+        // --- Comportamento 2: Segura para Layer 2, Toca para ESCAPE ---
         lh_bt: layer_hold_bt {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
-            // Segurar = &mo (Momentary layer), Tocar = &kp (Keypress)
             bindings = <&mo>, <&kp>;
         };
     };
@@ -31,9 +27,9 @@
         // --- Camada 0: Padrão (Híbrida) ---
         default_layer {
             bindings = <
-                &lh_bt 2 ESC    &kp LCTRL(Z)    &kp DEL
-                &kp Q           &kp D           &kp RET
-                &kp L           &kp F           &lh 1 ESC  // <-- CORRIGIDO (usando &lh)
+                &lh_bt 2 ESCAPE    &kp LCTRL(Z)    &kp DEL     // <-- CORRIGIDO
+                &kp Q              &kp D           &kp RET
+                &kp L              &kp F           &lh 1 ESCAPE  // <-- CORRIGIDO
             >;
         };
 
@@ -42,7 +38,7 @@
             bindings = <
                 &trans          &kp R           &kp T
                 &kp O           &kp N           &kp LCTRL(Y)
-                &kp F6          &kp E           &trans      // &trans = tecla "transparente"
+                &kp F6          &kp E           &trans
             >;
         };
 
