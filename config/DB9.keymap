@@ -31,7 +31,7 @@
         // --- Camada 0: Padrão (Híbrida) ---
         default_layer {
             bindings = <
-                &LH_BT 2 ESC    &kp LCTRL Z     &kp DEL
+                &LH_BT 2 ESC    &kp LCTRL(Z)     &kp DEL
                 &kp Q           &kp D           &kp RET  // RET = Enter
                 &kp L           &kp F           &mo 1    // Segure para ativar a Camada 1
             >;
@@ -41,7 +41,7 @@
         layer_1 {
             bindings = <
                 &trans          &kp R           &kp T
-                &kp O           &kp N           &kp LCTRL Y // 'I' (Measure) virou 'N' (Look At)
+                &kp O           &kp N           &kp LCTRL(Y) // 'I' (Measure) virou 'N' (Look At)
                 &kp F6          &kp E           &trans      // 'S' (Sketch) virou 'F6' (Home View)
             >;
         };
