@@ -4,23 +4,23 @@
 
 / {
     behaviors {
-        // Comportamento para Camada 1 (Fusion Sketch)
-        // Segura para &mo 1
-        LH: layer_hold {
+        // --- Comportamento 1: Segura para Layer 1, Toca para ESC ---
+        // (Usado no canto inferior direito)
+        lh: layer_hold {
             compatible = "zmk,behavior-hold-tap";
-            label = "LAYER_HOLD";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
+            // Segurar = &mo (Momentary layer), Tocar = &kp (Keypress)
             bindings = <&mo>, <&kp>;
         };
 
-        // Comportamento para Camada 2 (Bluetooth)
-        // Segura para &mo 2, Toca para &kp ESC
-        LH_BT: layer_hold_bt {
+        // --- Comportamento 2: Segura para Layer 2, Toca para ESC ---
+        // (Usado no canto superior esquerdo)
+        lh_bt: layer_hold_bt {
             compatible = "zmk,behavior-hold-tap";
-            label = "LAYER_HOLD_BT";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
+            // Segurar = &mo (Momentary layer), Tocar = &kp (Keypress)
             bindings = <&mo>, <&kp>;
         };
     };
@@ -31,9 +31,9 @@
         // --- Camada 0: Padrão (Híbrida) ---
         default_layer {
             bindings = <
-                &LH_BT 2 ESC    &kp LCTRL(Z)     &kp DEL
-                &kp Q           &kp D           &kp RET  // RET = Enter
-                &kp L           &kp F           &mo 1    // Segure para ativar a Camada 1
+                &lh_bt 2 ESC    &kp LCTRL(Z)    &kp DEL
+                &kp Q           &kp D           &kp RET
+                &kp L           &kp F           &lh 1 ESC  // <-- CORRIGIDO (usando &lh)
             >;
         };
 
@@ -41,15 +41,15 @@
         layer_1 {
             bindings = <
                 &trans          &kp R           &kp T
-                &kp O           &kp N           &kp LCTRL(Y) // 'I' (Measure) virou 'N' (Look At)
-                &kp F6          &kp E           &trans      // 'S' (Sketch) virou 'F6' (Home View)
+                &kp O           &kp N           &kp LCTRL(Y)
+                &kp F6          &kp E           &trans      // &trans = tecla "transparente"
             >;
         };
 
         // --- Camada 2: Bluetooth (Seu layout) ---
         layer_2 {
             bindings = <
-                &trans          &none           &bootloader // &trans no gatilho
+                &trans          &none           &bootloader
                 &none           &none           &bt BT_CLR
                 &bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2
             >;
